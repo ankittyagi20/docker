@@ -1,0 +1,1 @@
+* * * * * root python -W igore /var/dockerscale/scale.py -u 75 -l 50 -t 30 -i 1 -b 3 -d 1 -s 'web' 1>/var/log/dockerscale.log
