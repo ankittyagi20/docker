@@ -6,10 +6,6 @@ import datetime
 import re
 import os
 
-
-#client = docker.DockerClient(base_url='unix://var/run/docker.sock', version='auto')
-#con = client.containers.list()[1]
-
 def get_CPU_Percentage(con):
     conName = con.name
     cpupercentage = 0.00
@@ -22,12 +18,6 @@ def get_CPU_Percentage(con):
     constat = con.stats(stream=False)
     prestats = constat['precpu_stats']
     cpustats = constat['cpu_stats']
-    # print(cpustats)
-
-    # cpuDelta = res.cpu_stats.cpu_usage.total_usage -  res.precpu_stats.cpu_usage.total_usage;
-    # systemDelta = res.cpu_stats.system_cpu_usage - res.precpu_stats.system_cpu_usage;
-    # var RESULT_CPU_USAGE = cpuDelta / systemDelta * 100;
-    # CPUStats.CPUUsage.PercpuUsage
 
     prestats_totalusage = prestats['cpu_usage']['total_usage']
     stats_totalusage = cpustats['cpu_usage']['total_usage']

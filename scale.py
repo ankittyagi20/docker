@@ -36,12 +36,10 @@ def scale_service(u_t, l_t, c_t, up_scale_factor, down_scale_factor, base_pool, 
     pool_count = 0
 
     #scale_list is the list of services passed as argument to the script that we want to run auto-scaling.
-    #if service.name in scale_list:
     for service in services:
       if service.name in scale_list:
         current_pool = {}
         running_tasks = service.tasks(filters={'desired-state': 'running'})
-        #pool_count = len(running_tasks)
         for task in running_tasks:
           container_id = task['Status']['ContainerStatus']['ContainerID']
           container_obj = client.containers.get(container_id=container_id)
@@ -94,7 +92,6 @@ if __name__ == "__main__":
   print "Inside main"
   try:
     args = get_args()
-    #print "Args: " + str(args)
     service_size = scale_service(u_t=args.u, l_t=args.l, c_t=args.t, up_scale_factor=args.i, down_scale_factor=args.d, base_pool=args.b, scale_list=args.s)
     print "Current pool size: " + str(service_size)
   except Exception as e:
