@@ -1,4 +1,3 @@
-#import clientConn
 import docker
 import logging
 import random
@@ -9,10 +8,6 @@ import os
 def get_CPU_Percentage(con):
     conName = con.name
     cpupercentage = 0.00
-
-    # Check if the container is running
-    if (con.status != 'running'):
-        raise ValueError('"%s" container is not running' % conName)
 
     # Get CPU Usage in percentage
     constat = con.stats(stream=False)
