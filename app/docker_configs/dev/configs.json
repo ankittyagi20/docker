@@ -1,0 +1,9 @@
+{
+  "flask_docker_configs":
+    {
+      "APP_NAME": "Flask",
+      "APP_VERSION": "0.10.1",
+      "IMAGE_NAME": "flask0.10.1"
+    }
+}
+
