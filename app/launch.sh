@@ -8,8 +8,15 @@ fi
 mode=$1
 environmemnt=$2
 version=$3
-#image_name=$4
+if [ $3 == "0.10.1" ]; then
+  image_name="flask0.10.1"
+fi
 
+if [ $3 == "0.10.1" ]; then
+  image_name="flask1.0.1"
+fi
+
+#echo $image_name
 if [ mode == 'run' ]; then
   PORT='-p 9090:9090'
 fi
