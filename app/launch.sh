@@ -8,6 +8,7 @@ fi
 mode=$1
 environmemnt=$2
 version=$3
+git_repo="git@github.com:ankittyagi20/docker.git"
 if [ $3 == "0.10.1" ]; then
   image_name="flask0.10.1"
 fi
