@@ -3,6 +3,16 @@
 import os
 import subprocess
 import json
+from git import Repo
+
+def get_git_repo(repo_url, repo_dir):
+  try:
+    cloned_repo = Repo.clone_from(repo_url, repo_dir)
+    if cloned_repo.git_dir:
+      print("{}".format("True"))
+
+  except RuntimeError as e:
+    print("Error occurred: {}".format(e))
 
 def get_config_dict(environment):
   conf_file=open("/app/docker_configs/"+environment+"/configs.json", 'r')
@@ -18,7 +28,6 @@ def get_app_name():
   environment = get_environment()
   conf_dict = get_config_dict(environment)
   app_name = conf_dict['flask_docker_configs']['APP_NAME']
-  conf_file.close()
   return app_name
 
 def get_flask_version():
@@ -37,15 +46,10 @@ def get_port():
   flask_app_port = os.environ['APP_PORT']
   return flask_app_port
 
-from flask import Flask
-app = Flask('__name__')
-@app.route('/')
-def hello_world():
-    return 'Welcome to the Flask App'
-
 if __name__ == '__main__':
+    repo_url = os.environ['REPO_URL']
+    repo_dir = os.environ['REPO_DIR']
+    get_git_repo(repo_url=repo_url, repo_dir=repo_dir)
     install_flask()
-    PORT = get_port()
+    version = get_flask_version()
     install_flask(version)
-    app.run(debug=True,host='0.0.0.0', port=int(PORT))
-

@@ -17,9 +17,8 @@ if [ $3 == "0.10.1" ]; then
   image_name="flask1.0.1"
 fi
 
-#echo $image_name
 if [ mode == 'run' ]; then
   PORT='-p 9090:9090'
 fi
 
-docker run -d -p $PORT $image_name -e MODE=$mode -e ENVIRONMENT=$environment -e VERSION=$version
+docker run -d $PORT $image_name -e MODE=$mode -e ENVIRONMENT=$environment -e VERSION=$version
