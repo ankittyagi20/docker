@@ -3,16 +3,12 @@
 import os
 import subprocess
 import json
-from git import Repo
 
 def get_git_repo(repo_url, repo_dir):
-  try:
-    cloned_repo = Repo.clone_from(repo_url, repo_dir)
-    if cloned_repo.git_dir:
-      print("{}".format("True"))
-
-  except RuntimeError as e:
-    print("Error occurred: {}".format(e))
+    cmd = "git clone "+repo_url+" "+repo_dir
+    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    return output, error
 
 def get_config_dict(environment):
   conf_file=open("/app/docker_configs/"+environment+"/configs.json", 'r')
@@ -33,6 +29,12 @@ def get_app_name():
 def get_flask_version():
   version=os.environ['VERSION']
   return version
+
+def get_image_name():
+  environment = get_environment()
+  conf_dict = get_config_dict(environment)
+  image_name = conf_dict['flask_docker_configs']['IMAGE_NAME']
+  return image_name
 
 def install_flask():
   app_name = get_app_name()

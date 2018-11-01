@@ -2,8 +2,8 @@
   "flask_docker_configs":
     {
       "APP_NAME": "Flask",
-      "APP_VERSION": "1.0.1",
-      "IMAGE_NAME": "flask1.0.1"
+      "IMAGE_NAME": "flask:qa",
+      "deployment": "qa"
     }
 }
 

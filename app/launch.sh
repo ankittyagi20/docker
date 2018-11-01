@@ -6,19 +6,26 @@ if [ $# -ne 3 ]; then
 fi
 
 mode=$1
-environmemnt=$2
+environment=$2
 version=$3
+
 git_repo="git@github.com:ankittyagi20/docker.git"
-if [ $3 == "0.10.1" ]; then
-  image_name="flask0.10.1"
+git_dir="/app/"
+
+if [ $environment == "dev" ]; then
+  image_name="flask:dev"
 fi
 
-if [ $3 == "0.10.1" ]; then
-  image_name="flask1.0.1"
+if [ $environment == "qa" ]; then
+  image_name="flask:qa"
 fi
 
-if [ mode == 'run' ]; then
-  PORT='-p 9090:9090'
+if [ $mode == "run" ]; then
+  PORT="-p 9090:9090"
 fi
 
-docker run -d $PORT $image_name -e MODE=$mode -e ENVIRONMENT=$environment -e VERSION=$version
+docker build -t $image_name .
+echo "PORT="$PORT
+echo "IMAGE_NAME="$image_name
+
+docker run -d $PORT -e "MODE=$mode" -e "ENVIRONMENT=$environment" -e "VERSION=$version" -e "REPO_URL=$git_repo" -e "REPO_DIR=$git_dir" $image_name
