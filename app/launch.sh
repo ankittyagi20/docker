@@ -10,7 +10,7 @@ environment=$2
 version=$3
 
 git_repo="git@github.com:ankittyagi20/docker.git"
-git_dir="/app/"
+git_dir="/docker"
 
 if [ $environment == "dev" ]; then
   image_name="flask:dev"

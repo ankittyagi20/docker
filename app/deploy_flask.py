@@ -11,7 +11,7 @@ def get_git_repo(repo_url, repo_dir):
     return output, error
 
 def get_config_dict(environment):
-  conf_file=open("/app/docker_configs/"+environment+"/configs.json", 'r')
+  conf_file=open("/docker/app/docker_configs/"+environment+"/configs.json", 'r')
   conf_dict=json.load(conf_file)
   conf_file.close()
   return conf_dict
@@ -44,6 +44,12 @@ def install_flask():
   output, error = process.communicate()
   return output, error
 
+def install_uwsgi():
+  cmd="pip install uwsgi"
+  process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+  output, error = process.communicate()
+  return output, error
+
 def get_port():
   flask_app_port = os.environ['APP_PORT']
   return flask_app_port
@@ -51,7 +57,6 @@ def get_port():
 if __name__ == '__main__':
     repo_url = os.environ['REPO_URL']
     repo_dir = os.environ['REPO_DIR']
-    get_git_repo(repo_url=repo_url, repo_dir=repo_dir)
+    get_git_repo(repo_url, repo_dir)
     install_flask()
-    version = get_flask_version()
-    install_flask(version)
+    install_uwsgi()
