@@ -55,8 +55,10 @@ def get_port():
   return flask_app_port
 
 if __name__ == '__main__':
-    repo_url = os.environ['REPO_URL']
-    repo_dir = os.environ['REPO_DIR']
+    #repo_url = os.environ['REPO_URL']
+    repo_url = "https://github.com/ankittyagi20/docker.git"
+    #repo_dir = os.environ['REPO_DIR']
+    repo_dir = "/docker"
     get_git_repo(repo_url, repo_dir)
     install_flask()
     install_uwsgi()

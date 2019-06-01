@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 if [ $# -ne 3 ]; then
   printf "Run the script like this: ./launch <mode> <environment> <version>... \nFor e.g. ./launch run dev 0.10.0"
